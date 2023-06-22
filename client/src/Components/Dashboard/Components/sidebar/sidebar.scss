@@ -1,0 +1,159 @@
+:root{
+    --primaryColor: hsl(94, 74%, 45%);
+    --hoverColor: hsl(93, 46%, 68%);
+    --paleGreen: hsl(96, 30%, 83%);
+    --whiteColor: rgba(225, 225, 225, 90%);
+    --blackColor: rgba(0, 0, 0, 75%);
+    --greyText: hsl(0, 0%, 75%);
+    --bgColor: hsl(111, 11%, 85%);
+    --inputColor: hsl(154, 14%, 90%); 
+
+    //Font and sizings
+    --biggestFontSize: 2.5rem;
+    --h1FontSize: 1.5rem;
+    --h2FontSize: 1.25rem;
+    --h3FontSize: 1rem;
+    --normalFontSize:.938rem;
+    --smallFontSize: .813rem;
+    --smallestFontSize: .75rem;
+}
+
+.sideBar{
+    background: var(--whiteColor);
+    box-shadow: 1px 0px 4px var(--greyText);
+    width: 18%;
+    height: 100%;
+    gap: 3rem;
+    overflow: auto;
+
+    .logoDiv{
+        padding: 1.5rem 1.5rem 0;
+        cursor: pointer;
+
+        img{
+            max-width: 20px;
+            margin-right: .5rem;
+            background: var(--inputColor);
+            border-radius: 2px;
+            padding: .2rem;
+        }
+
+        h2{
+            font-size: var(--h2FontSize);
+            color: var(--primaryColor);
+        }
+
+    }
+    
+    .menuDiv, .settingDiv{
+        .divTitle{
+            font-size: var(--h3FontSize);
+            color: var(--blackColor);
+            padding: 0 1.5rem 1.5rem;
+        }
+        .menuList{
+            padding: .2rem 1.5rem;
+            width: 100%;
+            position: relative;
+        }
+
+        &::before{
+            position: absolute;
+            content: '';
+            height: 100%;
+            left: 0;
+            width: 5px;
+            bottom: 0;
+            border-top-right-radius:10px ;
+            border-bottom-right-radius:10px ;
+            background: var(--primaryColor);
+        }
+
+        .menuLink{
+            color: var(--greyText);
+            font-weight: 500;
+            .icon{
+                margin-right: .5rem;
+            }
+        }
+
+        &:hover .menuLink{
+            color: var(--primaryColor);
+            transition: 0;
+        }
+
+        &:hover::before{
+            height: 100%;
+            transform: .3s ease;
+        }
+    }
+
+    .sideBarCard{
+        width: 100%;
+        padding: 1rem;
+        text-align: center;
+        position: relative;
+
+        .icon{
+            position: absolute;
+            background: var(--hoverColor);
+            border: 10px solid var(--whiteColor);
+            font-size: 3rem;
+            border-radius: 50%;
+            top: -8px;
+            right: 50%;
+            transform: translate(50%);
+            z-index: 100;
+        }
+
+        .cardContent{
+            position: relative;
+            padding: 1rem;
+            background: var(--hoverColor);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        h3{
+            font-size: var(--h3FontSize);
+            margin-top: 1rem;
+            padding: 1rem 0;
+            color: var(--blackColor);
+            font-weight: 800;
+        }
+        p{
+            font-size: var(--normalFontSize);
+            color: var(--blackColor);
+            padding-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .btn{
+            position: relative;
+            z-index: 1000;
+            color: var(--blackColor);
+        }
+
+        .circle1, .circle2{
+            position: absolute;
+            background: var(--paleGreen);
+            border-radius: 50%;
+            opacity: .7;
+        }
+
+        .circle1{
+            height: 100px;
+            width: 100px;
+            top: -50px;
+            left: -50px;
+        }
+        .circle2{
+            height: 150px;
+            width: 150px;
+            bottom: -80px;
+            right: -70px;
+            z-index: 1;
+        }
+    }
+}
+

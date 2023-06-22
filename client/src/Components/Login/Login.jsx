@@ -1,16 +1,32 @@
-import React from 'react';
+/* eslint-disable no-unused-vars */
+import React, {useState} from 'react';
 import './Login.css';
 import '../../App.css';
 import {Link} from 'react-router-dom';
+import Axios from 'axios';
 
 import video from '../../Assets/waves.mp4';
-
+import logo from '../../Assets/oil-spill.png'
 import {FaUserShield} from 'react-icons/fa';
 import {BsShieldLockFill} from 'react-icons/bs';
 import {AiOutlineSwapRight} from 'react-icons/ai';
 
 
 const Login = () =>{
+  const[loginUsername, setLoginUsername] = useState('');
+  const[loginPassword, setLoginPassword] = useState('');
+
+  const loginUser = ()=>{
+    Axios.post('http://localhost:3002/login', {
+      LoginUsername: loginUsername,
+      LoginPassword: loginPassword
+    }).then((response)=>{
+      console.log(response)
+    })
+
+    
+  }
+
     return (
       <div className="loginPage flex">
         <div className="container flex">
@@ -30,7 +46,7 @@ const Login = () =>{
 
           <div className="formDiv flex">
             <div className="headerDiv">
-              <img src="" alt="logo image"/>
+              <img src={logo} alt="logo image"/>
               <h3>Welcome back</h3>
             </div>
             <span className='showMessage'>Login Status will go here</span>
@@ -43,6 +59,9 @@ const Login = () =>{
                     type="text"
                     id="username"
                     placeholder="Enter username..."
+                    onChange = {(event)=>{
+                      setLoginUsername(event.target.value);
+                    }}
                   ></input>
                 </div>
               </div>
@@ -54,10 +73,13 @@ const Login = () =>{
                     type="password"
                     id="password"
                     placeholder="Enter password..."
+                    onChange ={(event)=>{
+                      setLoginPassword(event.target.value);
+                    }}
                   ></input>
                 </div>
               </div>
-              <button type="submit" className="btn flex">
+              <button type="submit" className="btn flex" onClick={loginUser}>
                 <span>Login</span>
                 <AiOutlineSwapRight className="icon" />
               </button>

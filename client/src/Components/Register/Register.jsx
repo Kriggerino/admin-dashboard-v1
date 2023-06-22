@@ -1,10 +1,12 @@
-import React from 'react';
+/* eslint-disable no-unused-vars */
+import React, {useState} from 'react';
 import './Register.css';
 import '../../App.css';
 import {Link} from 'react-router-dom';
+import Axios from 'axios';
 
 import video from '../../Assets/waves.mp4';
-
+import logo from '../../Assets/oil-spill.png'
 import {MdEmail} from 'react-icons/md';
 import {FaUserShield} from 'react-icons/fa';
 import {BsShieldLockFill} from 'react-icons/bs';
@@ -12,6 +14,22 @@ import {AiOutlineSwapRight} from 'react-icons/ai';
 
 
 const Register = () =>{
+  const[email, setEmail] = useState('');
+  const[username, setUsername] = useState('');
+  const[password, setPassword] = useState('');
+
+  //Onclick track user info entered
+  const createUser = ()=>{
+    //Axios to call server
+    Axios.post('http://localhost:3002/register', {
+      //Packing data payload
+      Email: email,
+      Username: username,
+      Password: password
+    }).then(()=>{
+      console.log('User has been created');
+    })
+  }
     return (
       <div className="loginPage flex">
         <div className="container flex">
@@ -31,7 +49,7 @@ const Register = () =>{
 
           <div className="formDiv flex">
             <div className="headerDiv">
-              <img src="" alt="logo image"/>
+              <img src={logo} alt="logo image"/>
               <h3>Welcome back</h3>
             </div>
             <form action="" className="form grid">
@@ -41,8 +59,11 @@ const Register = () =>{
                   <MdEmail className="icon" />
                   <input
                     type="text"
-                    id="username"
+                    id="email"
                     placeholder="Enter email..."
+                    onChange={(event) =>{
+                      setEmail(event.target.value)
+                    }}
                   ></input>
                 </div>
               </div>
@@ -54,6 +75,9 @@ const Register = () =>{
                     type="text"
                     id="username"
                     placeholder="Enter username..."
+                    onChange={(event) =>{
+                      setUsername(event.target.value)
+                    }}
                   ></input>
                 </div>
             </div>
@@ -65,10 +89,13 @@ const Register = () =>{
                     type="password"
                     id="password"
                     placeholder="Enter password..."
+                    onChange={(event) =>{
+                      setPassword(event.target.value)
+                    }}
                   ></input>
                 </div>
               </div>
-              <button type="submit" className="btn flex">
+              <button type="submit" className="btn flex" onClick={createUser}>
                 <span>Register</span>
                 <AiOutlineSwapRight className="icon" />
               </button>

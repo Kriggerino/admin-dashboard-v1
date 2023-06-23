@@ -17,26 +17,26 @@ const db = mysql.createConnection({
     password:'',
     database:'plantdb',
 })
-//Route to server
-app.post('/register', (req, res)=>{
-    //Variables from the form
-    const sentEmail = req.body.Email;
-    const sentUsername = req.body.Username;
-    const sentPassword = req.body.Password;
+// //Route to server
+// app.post('/register', (req, res)=>{
+//     //Variables from the form
+//     const sentEmail = req.body.Email;
+//     const sentUsername = req.body.Username;
+//     const sentPassword = req.body.Password;
 
-    const query='INSERT INTO users(email, username, password) VALUES (?,?,?)'
+//     const query='INSERT INTO users(email, username, password) VALUES (?,?,?)'
 
-    const values = [sentEmail, sentUsername, sentPassword];
+//     const values = [sentEmail, sentUsername, sentPassword];
 
-    db.query(query, values, (err, results)=>{
-        if(err){
-            res.send(err);
-        } else {
-            console.log('User successfully created!');
-            res.send({message: "User added."});
-        }
-    })
-})
+//     db.query(query, values, (err, results)=>{
+//         if(err){
+//             res.send(err);
+//         } else {
+//             console.log('User successfully created!');
+//             res.send({message: "User added."});
+//         }
+//     })
+// })
 
 app.post('/login', (req, res)=>{
     const sentLoginUsername = req.body.LoginUsername;
@@ -57,3 +57,10 @@ app.post('/login', (req, res)=>{
     })
 })
 
+app.get('/getUser', (req, res) => {
+    const query = "SELECT * FROM users";
+    db.query(query, (err, result) => {
+        if(err) return res.json({Error: "Get user error in sql"});
+        return res.json({Status: "Success", Result: result})
+    })
+})

@@ -2,7 +2,7 @@
 import React, {useState} from 'react';
 import './Register.css';
 import '../../App.css';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import Axios from 'axios';
 
 import video from '../../Assets/waves.mp4';

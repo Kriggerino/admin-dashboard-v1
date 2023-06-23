@@ -2,7 +2,7 @@
 import React, {useState} from 'react';
 import './Login.css';
 import '../../App.css';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import Axios from 'axios';
 
 import video from '../../Assets/waves.mp4';
@@ -15,13 +15,19 @@ import {AiOutlineSwapRight} from 'react-icons/ai';
 const Login = () =>{
   const[loginUsername, setLoginUsername] = useState('');
   const[loginPassword, setLoginPassword] = useState('');
-
-  const loginUser = ()=>{
+  const navigateTo = useNavigate();
+  const loginUser = (e)=>{
+    e.preventDefault();
     Axios.post('http://localhost:3002/login', {
       LoginUsername: loginUsername,
       LoginPassword: loginPassword
     }).then((response)=>{
-      console.log(response)
+      console.log(response.data)
+       if(response.data.message){
+         navigateTo('/')
+       } else{
+         navigateTo('/dashboard')
+       }
     })
 
     

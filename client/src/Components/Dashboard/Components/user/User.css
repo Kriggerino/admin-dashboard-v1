@@ -1,0 +1,11 @@
+.tableDiv {
+  width: 100%;
+  margin: 1rem;
+}
+.tableDiv .tableTitle {
+  text-align: center;
+}
+.tableDiv .tableContainer .data-table {
+  width: 80%;
+  margin: 20px auto;
+}/*# sourceMappingURL=User.css.map */

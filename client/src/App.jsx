@@ -3,7 +3,7 @@ import Dashboard from './Components/Dashboard/Dashboard';
 import Login from './Components/Login/Login';
 import Register from './Components/Register/Register';
 import User from './Components/Dashboard/Components/user/User';
-
+import EditUser from './Components/Dashboard/Components/edituser/EditUser';
 import{
   BrowserRouter,
   Routes,
@@ -26,7 +26,7 @@ import{
 // ]);
 
 function App() {
-
+  
   return (
     <BrowserRouter>
     <Routes>
@@ -34,8 +34,8 @@ function App() {
       <Route path='/dashboard' element={<Dashboard />}>
        <Route path='/dashboard/user' element={<User/>}></Route>
         {/*<Route path='/profile' element={<Profile />}></Route>
-        <Route path='/create' element={<AddEmployee />}></Route>
-  <Route path='/employeeEdit/:id' element={<EditEmployee />}></Route>*/}
+        <Route path='/create' element={<AddEmployee />}></Route>*/}
+        <Route path='/dashboard/userEdit/:id' element={<EditUser />}></Route>
       </Route>
       <Route path='/register' element={<Register />}></Route>
     </Routes>

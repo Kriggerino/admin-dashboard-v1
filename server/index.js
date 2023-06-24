@@ -1,66 +1,61 @@
-const express = require('express');
+import require from 'requirejs';
+const express= require('express')
+const mysql = require('mysql')
+const cors = require('cors')
+import cookieParser from 'cookie-parser'
+import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
+import multer from 'multer'
+import path from 'path'
+
 const app = express();
-const mysql = require('mysql');
-const cors = require('cors');
-
-app.use(express.json());
 app.use(cors());
+app.use(cookieParser());
+app.use(express.json());
 
-app.listen(3002, ()=>{
-    console.log('Server is running on port 3002');
-})
+
+
 
 //Database Info
-const db = mysql.createConnection({
+const con = mysql.createConnection({
     user:'root',
     host:'localhost',
     password:'',
     database:'plantdb',
 })
-// //Route to server
-// app.post('/register', (req, res)=>{
-//     //Variables from the form
-//     const sentEmail = req.body.Email;
-//     const sentUsername = req.body.Username;
-//     const sentPassword = req.body.Password;
 
-//     const query='INSERT INTO users(email, username, password) VALUES (?,?,?)'
+con.connect(function(err) {
+    if(err) {
+        console.log("Error in Connection");
+    } else {
+        console.log("Connected");
+    }
+})
 
-//     const values = [sentEmail, sentUsername, sentPassword];
-
-//     db.query(query, values, (err, results)=>{
-//         if(err){
-//             res.send(err);
-//         } else {
-//             console.log('User successfully created!');
-//             res.send({message: "User added."});
-//         }
-//     })
-// })
-
-app.post('/login', (req, res)=>{
-    const sentLoginUsername = req.body.LoginUsername;
-    const sentLoginPassword = req.body.LoginPassword;
-
-    const query='SELECT * FROM users WHERE username=? && password=?'
-    const values = [sentLoginUsername, sentLoginPassword]
-    db.query(query, values, (err, results)=>{
-        if(err){
-            res.send({error:err});
-        }
-        if(results.length > 0){
-            res.send(results);
-        }
-        else {
-            res.send({message: 'Credentials not match!'})
+app.post('/login', (req, res) => {
+    const sql = "SELECT * FROM users Where email = ? AND  password = ?";
+    con.query(sql, [req.body.email, req.body.password], (err, result) => {
+        if(err) return res.json({Status: "Error", Error: "Error in running query"});
+        if(result.length > 0) {
+            // const id = result[0].id;
+            // const token = jwt.sign({role: "admin", id}, "jwt-secret-key", {expiresIn: '1d'});
+            // res.cookie('token', token);
+            return res.json({Status: "Success"})
+        } else {
+            return res.json({Status: "Error", Error: "Wrong Email or Password"});
         }
     })
 })
 
 app.get('/getUser', (req, res) => {
     const query = "SELECT * FROM users";
-    db.query(query, (err, result) => {
+    con.query(query, (err, result) => {
         if(err) return res.json({Error: "Get user error in sql"});
         return res.json({Status: "Success", Result: result})
     })
+})
+
+
+app.listen(8081, ()=> {
+    console.log("Running");
 })

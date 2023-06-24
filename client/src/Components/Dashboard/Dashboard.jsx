@@ -92,7 +92,11 @@ const Dashboard = () => {
           <div className="cardContent">
             <div className="circle1"></div>
             <div className="circle2"></div>
-            <button className="btn">Log out</button>
+            <button className="btn">
+              <Link to={'/'}>
+              Log out
+              </Link>
+            </button>
           </div>
         </div>
       </div>

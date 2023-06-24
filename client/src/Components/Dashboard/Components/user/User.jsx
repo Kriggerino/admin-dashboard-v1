@@ -35,14 +35,28 @@ const User = () => {
             </tr>
           </thead>
           <tbody>
-            {data.map((user, index)=>{
-                return(
-                    <tr key={index}>
-                        <td>{user.username}</td>
-                        <td>{user.email}</td>
-                        <td>{user.role}</td>
-                    </tr>
-                )
+            {data.map((user, index) => {
+              return (
+                <tr key={index}>
+                  <td>{user.username}</td>
+                  <td>{user.email}</td>
+                  <td>{user.role}</td>
+                  <td>
+                    <Link
+                      to={`/employeeEdit/` + user.id}
+                      className="btn"
+                    >
+                      edit
+                    </Link>
+                    <button
+                      onClick={(e) => handleDelete(user.id)}
+                      className="btn"
+                    >
+                      delete
+                    </button>
+                  </td>
+                </tr>
+              );
             })}
           </tbody>
         </table>

@@ -1,7 +1,7 @@
-import React from "react";
+import React, {useEffect} from "react";
 import "./Dashboard.css";
 import Top from './Components/body_section/top/Top';
-import Axios from "axios";
+import axios from 'axios'
 import "./sidebar.css";
 import logo from "../../Assets/oil-spill.png";
 import { IoMdSpeedometer } from "react-icons/io";
@@ -12,9 +12,21 @@ import { AiOutlinePieChart } from "react-icons/ai";
 import { BiTrendingUp } from "react-icons/bi";
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 
+
 const Dashboard = () => {
+  const navigate = useNavigate();
+  axios.defaults.withCredentials = true;
+  
+
+  const handleLogout = () => {
+		axios.get('http://localhost:8081/logout')
+		.then(res => {
+			navigate('/')
+		}).catch(err => console.log(err));
+	}
+  
   return (
-    <div className="container">
+    <div className="containerDiv">
       <div className="sideBar grid">
         <div className="logoDiv flex">
           <img src={logo} alt="Logo Image" />
@@ -25,17 +37,17 @@ const Dashboard = () => {
           <h3 className="divTitle">QUICK MENU</h3>
           <ul className="menuList grid">
             <li className="listItem">
-              <a href="#" className="menuLink flex">
+                <Link to={'/dashboard'} className="menuLink flex">
                 <IoMdSpeedometer className="icon" />
                 <span className="smallText">Dashboard</span>
-              </a>
+                </Link>
             </li>
 
             <li className="listItem">
-              <a href="#" className="menuLink flex">
+                <Link to={'/dashboard/user'} className="menuLink flex">
                 <MdDeliveryDining className="icon" />
-                <span className="smallText">My Orders</span>
-              </a>
+                <span className="smallText">Users</span>
+                </Link>
             </li>
 
             <li className="listItem">
@@ -92,10 +104,8 @@ const Dashboard = () => {
           <div className="cardContent">
             <div className="circle1"></div>
             <div className="circle2"></div>
-            <button className="btn">
-              <Link to={'/'}>
+            <button className="btn" onClick={handleLogout}>            
               Log out
-              </Link>
             </button>
           </div>
         </div>

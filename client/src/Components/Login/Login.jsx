@@ -17,10 +17,12 @@ const Login = () => {
     password: "",
   });
   const navigate = useNavigate();
+  axios.defaults.withCredentials = true;
   const [error, setError] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    axios.defaults.withCredentials = true;
     axios
       .post("http://localhost:8081/login", values)
       .then((res) => {

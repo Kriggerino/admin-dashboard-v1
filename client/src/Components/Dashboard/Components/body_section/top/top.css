@@ -18,7 +18,7 @@
 
 .topSection .headerSection {
   padding: 0.75rem;
-  justify-content: space-between;
+  justify-content: space-evenly;
   width: 82vw;
 }
 .topSection .headerSection .title h1 {

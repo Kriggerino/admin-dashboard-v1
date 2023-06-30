@@ -9,6 +9,8 @@ import{
   Routes,
   Route,
 } from 'react-router-dom';
+import CreateUser from './Components/Dashboard/Components/createuser/CreateUser';
+import { useState } from 'react';
 
 // const router = createBrowserRouter([
 //   {
@@ -27,14 +29,15 @@ import{
 
 function App() {
   
+
   return (
     <BrowserRouter>
     <Routes>
       <Route path='/' element={<Login />}></Route>
       <Route path='/dashboard' element={<Dashboard />}>
        <Route path='/dashboard/user' element={<User/>}></Route>
-        {/*<Route path='/profile' element={<Profile />}></Route>
-        <Route path='/create' element={<AddEmployee />}></Route>*/}
+        {/*<Route path='/profile' element={<Profile />}></Route>*/}
+        <Route path='/dashboard/createuser' element={<CreateUser />}></Route>
         <Route path='/dashboard/userEdit/:id' element={<EditUser />}></Route>
       </Route>
       <Route path='/register' element={<Register />}></Route>

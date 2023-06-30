@@ -2,7 +2,6 @@
 
 *{
     padding: 0;
-    box-sizing: border-box;
     margin: 0;
     font-family: 'Montserrat', sans-serif;
     transition: .3s ease;
@@ -24,6 +23,7 @@
     --normalFontSize:.938rem;
     --smallFontSize: .813rem;
     --smallestFontSize: .75rem;
+    
 }
 
 html{
@@ -75,19 +75,26 @@ img{
 
 body{
     display: flex;
-    margin: auto;
     padding: 1rem;
+    min-height: 100vh;
 }
 
-.container{
+.containerDiv{
     position: relative;
-    width: 95vw;
-    height: 95vh;
+    width: 100vw;
+    height: 100%;
     display: flex;
     background: var(--bgColor);
-    overflow: hidden;
-    border-radius: 1rem;
-    box-shadow: 2px 2px 8px var(--greyText);
+    margin: 0;
+}
+
+
+.mainContent{
+    padding-left: 20%;
+}
+
+.bottom{
+    width: 100%;
 }
 
 ::-webkit-scrollbar{
